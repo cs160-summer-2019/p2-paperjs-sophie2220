@@ -8,7 +8,10 @@
 
 	<script type="text/javascript" src="{% static 'coloring/vendors/jquery/jquery-3.3.1.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'coloring/vendors/paper/paper-full.min.js' %}"></script>
-
+  
+  <link rel="stylesheet" type="text/css" href="{% static 'coloring/vendors/bootstrap/css/bootstrap.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'coloring/css/style.css' %}" />
+  
 	<style type="text/css">
 		#color-palette {
 			width: 300px;
@@ -41,13 +44,12 @@
 		window.onload = function() {
 			var canvas = document.getElementById('myCanvas');
 
-			// coloring page
-			var mandala = {
+      var mandala = {
 				item: null,
 				lastClicked: null,
-				filePath: '/static/coloring/images/mandala-freepik.svg'
+				filePath: '/static/coloring/images/mandala-freepik-simple.svg'
 			};	
-
+      
 			// color palette
 			var cp = {
 				history: ["#000000"], // black selected by default
@@ -81,21 +83,104 @@
           }
 				}
 			}
-
-			// your custom interaction goes here!
-			// you may replace everything
-			function myCustomInteraction() {
-        
+      
+      function myCustomInteraction() {
+        var eraser = false;
+        var bucket = true;
+        var eraserbutton = document.getElementById('eraser');
+        var bucketbutton = document.getElementById('bucket');
+        eraserbutton.onclick = function() {
+           eraserbutton.innerHTML = "Eraser (selected)";
+           bucketbutton.innerHTML = "Paint Bucket";
+           eraser = true;
+           bucket = false;
+        };
+        bucketbutton.onclick = function() {
+           bucketbutton.innerHTML = "Paint Bucket (selected)";
+           eraserbutton.innerHTML = "Eraser";
+           bucket = true;
+           eraser = false;
+        };
+        var player1 = 'balloon';
+        var player2 = 'cat';
+        var img1 = document.getElementById('player-1');
+        var img2 = document.getElementById('player-2');
+        document.getElementById('player-1-button').onclick = function() {
+            if (player1 == 'balloon') {
+              img1.src = 'http://www.cndajin.com/data/wls/295/26632635.jpg';
+              player1 = 'cat';
+            } else if (player1 == 'cat') {
+              img1.src = 'https://previews.123rf.com/images/reginast777/reginast7771605/reginast777160500025/58816431-cute-cartoon-girl-and-flowers-on-a-pink-background.jpg';
+              player1 = 'flower';
+            } else if (player1 == 'flower') {
+              img1.src = 'https://images.fineartamerica.com/images-medium-large-5/cute-cartoon-girl-with-bird-and-butterfly-reginast777.jpg';
+              player1 = 'butterfly';
+            } else if (player1 == 'butterfly') {
+              img1.src = 'http://www.cndajin.com/data/wls/295/26634260.jpg';
+              player1 = 'headband';
+            } else if (player1 == 'headband') {
+              img1.src = 'https://previews.123rf.com/images/reginast777/reginast7771706/reginast777170600014/80538122-cute-cartoon-boy-is-sitting-on-the-moon.jpg';
+              player1 = 'moon';
+            } else if (player1 == 'moon') {
+              img1.src = 'https://previews.123rf.com/images/reginast777/reginast7771708/reginast777170800166/84947879-cute-cartoon-boy-goes-on-a-car-with-dog.jpg';
+              player1 = 'car';
+            } else if (player1 == 'car') {
+              img1.src = 'https://previews.123rf.com/images/reginast777/reginast7771607/reginast777160700011/60844676-cute-cartoon-boy-and-giraffe-on-a-pink-background.jpg';
+              player1 = 'giraffe';
+            } else if (player1 == 'giraffe') {
+              img1.src = 'https://previews.123rf.com/images/reginast777/reginast7771610/reginast777161000134/66403308-cute-cartoon-boy-in-a-knitted-cap-and-a-coat-and-snowman.jpg';
+              player1 = 'snowman';
+            } else if (player1 == 'snowman') {
+              img1.src = 'https://previews.123rf.com/images/reginast777/reginast7771606/reginast777160600017/60844612-cute-cartoon-boy-with-a-cap-on-a-skateboard-and-butterflies.jpg';
+              player1 = 'skateboard';
+            } else if (player1 == 'skateboard') {
+              img1.src = 'https://previews.123rf.com/images/reginast777/reginast7771605/reginast777160500011/58315460-cute-cartoon-girl-with-a-balloon-on-the-meadow.jpg';
+              player1 = 'balloon';
+            }
+         }
+         document.getElementById('player-2-button').onclick = function() {
+              if (player2 == 'balloon') {
+                img2.src = 'http://www.cndajin.com/data/wls/295/26632635.jpg';
+                player2 = 'cat';
+              } else if (player2 == 'cat') {
+                img2.src = 'https://previews.123rf.com/images/reginast777/reginast7771605/reginast777160500025/58816431-cute-cartoon-girl-and-flowers-on-a-pink-background.jpg';
+                player2 = 'flower';
+              } else if (player2 == 'flower') {
+                img2.src = 'https://images.fineartamerica.com/images-medium-large-5/cute-cartoon-girl-with-bird-and-butterfly-reginast777.jpg';
+                player2 = 'butterfly';
+              } else if (player2 == 'butterfly') {
+                img2.src = 'http://www.cndajin.com/data/wls/295/26634260.jpg';
+                player2 = 'headband';
+              } else if (player2 == 'headband') {
+                img2.src = 'https://previews.123rf.com/images/reginast777/reginast7771706/reginast777170600014/80538122-cute-cartoon-boy-is-sitting-on-the-moon.jpg';
+                player2 = 'moon';
+              } else if (player2 == 'moon') {
+                img2.src = 'https://previews.123rf.com/images/reginast777/reginast7771708/reginast777170800166/84947879-cute-cartoon-boy-goes-on-a-car-with-dog.jpg';
+                player2 = 'car';
+              } else if (player2 == 'car') {
+                img2.src = 'https://previews.123rf.com/images/reginast777/reginast7771607/reginast777160700011/60844676-cute-cartoon-boy-and-giraffe-on-a-pink-background.jpg';
+                player2 = 'giraffe';
+              } else if (player2 == 'giraffe') {
+                img2.src = 'https://previews.123rf.com/images/reginast777/reginast7771610/reginast777161000134/66403308-cute-cartoon-boy-in-a-knitted-cap-and-a-coat-and-snowman.jpg';
+                player2 = 'snowman';
+              } else if (player2 == 'snowman') {
+                img2.src = 'https://previews.123rf.com/images/reginast777/reginast7771606/reginast777160600017/60844612-cute-cartoon-boy-with-a-cap-on-a-skateboard-and-butterflies.jpg';
+                player2 = 'skateboard';
+              } else if (player2 == 'skateboard') {
+                img2.src = 'https://previews.123rf.com/images/reginast777/reginast7771605/reginast777160500011/58315460-cute-cartoon-girl-with-a-balloon-on-the-meadow.jpg';
+                player2 = 'balloon';
+              }
+           }
 				var tool = new paper.Tool();
-
-				tool.onMouseDown = function (event) {
-				    var hit = mandala.item.hitTest(event.point, { tolerance: 10, fill: true });
-				    if (hit) {
-				        hit.item.fillColor = cp.history[cp.history.length - 1];
-				    }
-				}
+        tool.onMouseDown = function (event) {
+          var hit = mandala.hitTest(event.point, { tolerance: 10, fill: true });
+          if (hit && eraser) {
+            hit.item.fillColor = "white";
+          } else if (hit && bucket) {
+            hit.item.fillColor = cp.history[cp.history.length - 1];
+          } 
+        }
 			}
-
 
 			// create a color palette with the given colors
 			function createColorPalette(colors){
@@ -115,7 +200,7 @@
 			// loads a set of colors from a json to create a color palette
 			function getColorsCreatePalette(){
 				cp.$container.html(" ");
-				$.getJSON('/static/coloring/vendors/material/material-colors.json', function(colors){
+        $.getJSON('/static/coloring/vendors/material/material-color.json', function(colors){
 					var keys = Object.keys(colors);
 					for (var i = keys.length - 1; i >= 0; i--) {
 						cp.options.push(colors[keys[i]][500]);
@@ -123,16 +208,51 @@
 					createColorPalette(cp.options);
 				});
 			}
+      
+      function makeTimer(){
+        var minutesLabel = document.getElementById("minutes");
+        var secondsLabel = document.getElementById("seconds");
+        var totalSeconds = 0;
+        setInterval(setTime, 1000);
+
+        function setTime() {
+          ++totalSeconds;
+          secondsLabel.innerHTML = pad(totalSeconds % 60);
+          minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+          if (parseInt(totalSeconds/60) % 2 == 0) {
+            document.getElementById("play-1").style.color = "red";
+            document.getElementById("play-1").innerHTML = "Player 1: Color";
+            document.getElementById("play-2").style.color = "black";
+            document.getElementById("play-2").innerHTML = "Player 2: Relax";
+          } else {
+            document.getElementById("play-2").style.color = "red";
+            document.getElementById("play-2").innerHTML = "Player 2: Color";
+            document.getElementById("play-1").style.color = "black";
+            document.getElementById("play-1").innerHTML = "Player 1: Relax";
+          }
+        }
+
+        function pad(val) {
+          var valString = val + "";
+          if (valString.length < 2) {
+            return "0" + valString;
+          } else {
+            return valString;
+          }
+        }
+      }
 
 			function init(custom){
 				paper.setup(canvas);
 				getColorsCreatePalette();
+        makeTimer();
 
 				paper.project.importSVG(mandala.filePath, function(item) { 
 					mandala.item = item._children["design-freepik"];
 				    paper.project.insertLayer(0,mandala.item);
 
 				    if (custom) {
+              mandala = item;
 				    	myCustomInteraction();	
 				    } else {
 				    	myGradientInteraction();
@@ -154,9 +274,59 @@
 		}
 	</script>
 </head>
-<body>	
-
-	<canvas id="myCanvas" width="750px" height="750px"></canvas>
-	<div id="color-palette"></div>
+<body>
+ 
+  <div class = "container">
+    <div class = "row">
+      <div class = "col-med-4">
+        <canvas id="myCanvas" width="500px" height="500px"></canvas>
+      </div>
+      <div class = "col-med-4">
+	      <div id="color-palette"></div>
+        <div class = 'col-med-4'>
+          <h1 id = "play-1">Player 1: Color</h1>
+          <img id = "player-1" src = "https://previews.123rf.com/images/reginast777/reginast7771605/reginast777160500011/58315460-cute-cartoon-girl-with-a-balloon-on-the-meadow.jpg">
+          <br>
+          <button type = "button" id = 'player-1-button'>
+            Change Player 1 Icon
+          </button>
+        </div>
+      </div>
+      <div class = 'col-med-4'>
+        <div class = "col-med-6">
+          <h1 id = "play-2">Player 2: Relax</h1>
+          <img id = "player-2" src = "http://www.cndajin.com/data/wls/295/26632635.jpg">
+          <br>
+          <button type = "button" id = 'player-2-button'>
+            Change Player 2 Icon
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class = "row">
+      <div class = "col-med-2">
+        <img id = "erasericon" src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_Dl0_QAuq38TG9sjU9yB_5ga67-hmzGzGE6_mqUa6KGOFNgtG">
+      </div>
+      <div class="col-med-2">
+        <img src = "https://static.thenounproject.com/png/104334-200.png">
+      </div>
+      <div class="col-med-2">
+        <label id="minutes">00</label><font size="80">:</font><label id="seconds">00</label>
+      </div>
+      <div class = "col-med-2">
+        <img src = "https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-undo-512.png">
+      </div>
+      <div class ="col-med-2">
+        <img src = "https://image.freepik.com/free-icon/redo-arrow_318-1280.jpg">
+      </div>
+    </div>
+    <div class = "row">
+      <button type='button' id='eraser'>Eraser</button>
+      <button type='button' id='bucket'>Paint Bucket (selected)</button>
+      <embed src="/static/coloring/music/air.mp3" autostart="true" loop="true">
+      <button type='button'>Undo</button>
+      <button type='button'>Redo</button>
+    </div>
+  </div>
 </body>
 </html>
